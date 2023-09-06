@@ -12,7 +12,7 @@ class CreatorController extends Controller
      */
     public function index()
     {
-        //
+        return view('creator.index');
     }
 
     /**
@@ -26,9 +26,12 @@ class CreatorController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function search(Request $request)
     {
-        //
+        $query = $request->input('query');
+        $products = creator::where('products', 'like', '%' . $query . '%')->get();
+
+        return view('creator.results', compact('products'));
     }
 
     /**

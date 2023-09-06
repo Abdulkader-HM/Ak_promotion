@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\CreatorController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
@@ -28,4 +29,11 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
-require __DIR__.'/auth.php';
+require __DIR__ . '/auth.php';
+
+Route::middleware('auth')->group(function () {
+    Route::get('/creator/index', [CreatorController::class, 'index']);
+    Route::get('/products/search', [CreatorController::class,'search'])->name('search');
+
+});
+
