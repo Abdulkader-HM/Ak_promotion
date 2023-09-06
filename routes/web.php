@@ -26,7 +26,6 @@ Route::get('/dashboard', function () {
     } elseif (auth()->user()->premission == 'viewer') {
         return view('viewer.index');
     }
-    // return view('dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::middleware('auth')->group(function () {

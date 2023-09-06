@@ -12,7 +12,7 @@
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 text-gray-900 dark:text-gray-100">
-                   welcome {{ auth()->user()->name}} as a {{ auth()->user()->premission }}
+                   welcome {{ auth()->user()->name}} as a <b style="color: purple">{{ auth()->user()->premission }}</b> 
                 </div>
             </div>
         </div>
