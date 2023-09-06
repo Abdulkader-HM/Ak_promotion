@@ -12,7 +12,7 @@ class ViewerController extends Controller
      */
     public function index()
     {
-        //
+        return view('viewer.index');
     }
 
     /**

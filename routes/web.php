@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\CreatorController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\ViewerController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -20,7 +21,12 @@ Route::get('/', function () {
 });
 
 Route::get('/dashboard', function () {
-    return view('dashboard');
+    if (auth()->user()->premission == 'user') {
+        return view('creator.index');
+    } elseif (auth()->user()->premission == 'viewer') {
+        return view('viewer.index');
+    }
+    // return view('dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::middleware('auth')->group(function () {
@@ -31,9 +37,11 @@ Route::middleware('auth')->group(function () {
 
 require __DIR__ . '/auth.php';
 
-Route::middleware('auth')->group(function () {
+Route::middleware(['auth', 'check.creator'])->group(function () {
     Route::get('/creator/index', [CreatorController::class, 'index']);
-    Route::get('/products/search', [CreatorController::class,'search'])->name('search');
-
+    Route::get('/products/search', [CreatorController::class, 'search'])->name('search');
 });
 
+Route::middleware(['auth', 'check.viewer'])->group(function () {
+    Route::get('/viewer/index', [ViewerController::class, 'index']);
+});
